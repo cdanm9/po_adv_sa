@@ -1,0 +1,60 @@
+_schema-version: "3.2"
+ID: po_adv_sa
+version: 0.0.1
+modules:
+- name: po-adv-sa-approuter
+  type: approuter.nodejs
+  path: po-adv-sa-approuter
+  requires:
+  - name: po_adv_sa_html_repo_runtime
+  - name: uaa_po_adv_sa
+  - name: po_adv_sa_dest
+  parameters:
+    disk-quota: 256M
+    memory: 256M
+- name: po_adv_sa_ui_deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: po_adv_sa_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - po_advanced-content.zip
+      name: po_advanced
+      target-path: resources/
+- name: po_advanced
+  type: html5
+  path: po_advanced
+  build-parameters:
+    builder: custom
+    commands:
+    - npm install
+    - npm run build
+    supported-platforms: []
+resources:
+- name: po_adv_sa_html_repo_runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+- name: uaa_po_adv_sa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: po_adv_sa-xsuaa-service
+    service-plan: application
+- name: po_adv_sa_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+- name: po_adv_sa_dest
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: destination
+    service-plan: lite

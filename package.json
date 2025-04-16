@@ -1,0 +1,12 @@
+{
+  "name": "project",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "@sap/approuter": "14.4.2",
+    "@sap/html5-repo-mock": "2.1.5"
+  },
+  "scripts": {
+    "build-po_advanced": "cd po_advanced && if [ ! -d ${workspaceFolder}/po_adv_sa/po_advanced/node_modules/react-scripts ] && [ ! -d ${workspaceFolder}/po_adv_sa/node_modules/react-scripts ]; then npm i; fi && npm run build"
+  }
+}

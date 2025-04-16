@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run po_adv_sa-run",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/po-adv-sa-approuter/node_modules/@sap/html5-repo-mock/index.js",
+      "args": [
+        "--standalone",
+        "/po_advanced/index.html"
+      ],
+      "cwd": "${workspaceFolder}/po_advanced/build",
+      "env": {
+        "PORT": "6004",
+        "run.config": "{\"handlerId\":\"html5_run_config_handler_id\",\"runnableId\":\"/home/user/projects/po_adv_sa/po_advanced\"}"
+      },
+      "envFile": "${workspaceFolder}/po_advanced/.env1",
+      "preLaunchTask": "Run po_adv_sa"
+    }
+  ]
+}

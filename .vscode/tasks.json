@@ -1,0 +1,22 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run po_adv_sa",
+      "type": "shell",
+      "dependsOn": "Build po_adv_sa",
+      "command": "if [ ! -f ${workspaceFolder}/po-adv-sa-approuter/node_modules/@sap/html5-repo-mock/index.js ] || [ ! -f ${workspaceFolder}/po-adv-sa-approuter/node_modules/@sap/approuter/approuter.js ]; then npm i @sap/approuter && npm i @sap/html5-repo-mock; fi",
+      "options": {
+        "cwd": "${workspaceFolder}/po-adv-sa-approuter"
+      }
+    },
+    {
+      "label": "Build po_adv_sa",
+      "type": "shell",
+      "command": "if [ ! -d ${workspaceFolder}/po_advanced/build ]; then npm run build-po_advanced; fi",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      }
+    }
+  ]
+}
